@@ -15,7 +15,7 @@ class DiaryViewModel(application: Application): AndroidViewModel(application) {
     private val diaryDao = DiaryDatabase.getDatabase(application).diaryDao()
     private val repository: DiaryRepository
 
-    private val getAllData: LiveData<List<DiaryEntity>>
+    val getAllData: LiveData<List<DiaryEntity>>
 
     init {
         repository = DiaryRepository(diaryDao)
