@@ -26,7 +26,7 @@ class UpdateFragment : Fragment() {
         //сетаю в экран обновления
         binding.currentDateEt.setText(args.customItem.date)
         binding.currentDescriptionEt.setText(args.customItem.description)
-        binding.currentPrioritiesSpinner.setSelection(2)
+        binding.currentPrioritiesSpinner.setSelection(parsePriority(args.customItem.priority))
 
         return binding.root
     }
@@ -35,5 +35,11 @@ class UpdateFragment : Fragment() {
         inflater.inflate(R.menu.update_fragment_menu, menu)
     }
 
-    private fun parsePriority(priority: Priority) {}
+    private fun parsePriority(priority: Priority): Int {
+        return when(priority){
+            Priority.HIGH -> 0
+            Priority.MEDIUM -> 1
+            Priority.LOW ->2
+        }
+    }
 }
