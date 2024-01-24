@@ -17,6 +17,7 @@ import com.example.diary.R
 import com.example.diary.data.models.DiaryEntity
 import com.example.diary.data.models.Priority
 import com.example.diary.data.viewmodel.DiaryViewModel
+import com.example.diary.data.viewmodel.SharedViewModel
 import com.example.diary.databinding.FragmentAddBinding
 import com.example.diary.databinding.FragmentListBinding
 import java.text.SimpleDateFormat
@@ -27,6 +28,7 @@ class AddFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBinding
     private val mDiaryViewModel: DiaryViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,7 @@ class AddFragment : Fragment() {
 
         binding = FragmentAddBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         return binding.root
     }
 
@@ -49,7 +52,7 @@ class AddFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_add){
+        if (item.itemId == R.id.menu_add) {
             insertDataToDB()
         }
         return super.onOptionsItemSelected(item)
@@ -60,34 +63,18 @@ class AddFragment : Fragment() {
         val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
 
-        val validation = verifyDataFromUser(mDate, mDescription)
-        if(validation){
+        val validation = mSharedViewModel.verifyDataFromUser(mDate, mDescription)
+        if (validation) {
             val newData = DiaryEntity(
                 0,
                 mDate,
-                parsePriority(mPriority),
+                mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
             mDiaryViewModel.insertData(newData)
             Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
-    }
-
-    private fun verifyDataFromUser(date: String, description: String): Boolean {
-        return if(TextUtils.isEmpty(date) || TextUtils.isEmpty(description)){
-            false
-        } else !(date.isEmpty() || description.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority{
-        return when(priority){
-            "High Priority" -> {Priority.HIGH}
-            "Medium Priority" -> {Priority.MEDIUM}
-            "Low Priority" -> {Priority.LOW}
-            else -> Priority.LOW
-        }
-
     }
 
     private fun dateFormat() {
