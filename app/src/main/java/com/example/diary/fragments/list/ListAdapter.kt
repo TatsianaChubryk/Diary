@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.R
@@ -33,15 +34,15 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             dataList[position].description
 
         when (dataList[position].priority) {
-            Priority.HIGH -> holder.itemView.findViewById<Spinner>(R.id.priority_indicator)
+            Priority.HIGH -> holder.itemView.findViewById<CardView>(R.id.priority_indicator)
                 .setBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.red)
                 )
-            Priority.MEDIUM -> holder.itemView.findViewById<Spinner>(R.id.priority_indicator)
+            Priority.MEDIUM -> holder.itemView.findViewById<CardView>(R.id.priority_indicator)
                 .setBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.yellow)
                 )
-            Priority.LOW -> holder.itemView.findViewById<Spinner>(R.id.priority_indicator)
+            Priority.LOW -> holder.itemView.findViewById<CardView>(R.id.priority_indicator)
                 .setBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.green)
                 )
