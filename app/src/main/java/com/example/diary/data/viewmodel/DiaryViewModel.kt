@@ -33,4 +33,10 @@ class DiaryViewModel(application: Application): AndroidViewModel(application) {
             repository.updateData(diaryEntity)
         }
     }
+
+    fun deleteItem(diaryEntity: DiaryEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(diaryEntity)
+        }
+    }
 }
