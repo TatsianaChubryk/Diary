@@ -27,4 +27,10 @@ class DiaryViewModel(application: Application): AndroidViewModel(application) {
             repository.insertData(diaryEntity)
         }
     }
+
+    fun updateData(diaryEntity: DiaryEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateData(diaryEntity)
+        }
+    }
 }

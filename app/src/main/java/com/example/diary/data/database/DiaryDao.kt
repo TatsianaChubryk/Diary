@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.diary.data.models.DiaryEntity
 
 @Dao
@@ -15,4 +16,8 @@ interface DiaryDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(diaryEntity: DiaryEntity)
+
+    @Update
+    suspend fun updateData(diaryEntity: DiaryEntity)
+
 }

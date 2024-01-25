@@ -11,4 +11,8 @@ class DiaryRepository(private val diaryDao: DiaryDao) {
     suspend fun insertData(diaryEntity: DiaryEntity){
         diaryDao.insertData(diaryEntity)
     }
+
+    suspend fun updateData(diaryEntity: DiaryEntity){
+        diaryDao.updateData(diaryEntity)
+    }
 }

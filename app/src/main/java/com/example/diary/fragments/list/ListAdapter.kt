@@ -42,8 +42,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
 
         when (dataList[position].priority) {
-            Priority.HIGH -> holder.itemView.findViewById<CardView>(R.id.priority_indicator)
-                .setBackgroundColor(
+            Priority.HIGH -> holder.itemView.findViewById<CardView>(R.id.priority_indicator).setBackgroundColor(
                     ContextCompat.getColor(holder.itemView.context, R.color.red)
                 )
             Priority.MEDIUM -> holder.itemView.findViewById<CardView>(R.id.priority_indicator)

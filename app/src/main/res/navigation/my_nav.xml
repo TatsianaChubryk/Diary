@@ -35,7 +35,7 @@
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment" />
         <argument
-            android:name="customItem"
+            android:name="currentItem"
             app:argType="com.example.diary.data.models.DiaryEntity" />
     </fragment>
 </navigation>
