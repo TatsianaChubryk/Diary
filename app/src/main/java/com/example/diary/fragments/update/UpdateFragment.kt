@@ -54,15 +54,6 @@ class UpdateFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun confirmItemRemoval() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") {_, _ ->
-            mDiaryViewModel.deleteItem(args.currentItem)
-            Toast.makeText(requireContext(), "Seccessful delete", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        }
-    }
-
     private fun updateItem() {
         val date = binding.currentDateEt.text.toString()
         val description = binding.currentDescriptionEt.text.toString()
@@ -82,5 +73,19 @@ class UpdateFragment : Fragment() {
         } else{
             Toast.makeText(requireContext(), "SOS", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    //нужен ли мне этот вопрос перед удалением?
+    private fun confirmItemRemoval() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") {_, _ ->
+            mDiaryViewModel.deleteItem(args.currentItem)
+            Toast.makeText(requireContext(), "Successful delete: ${args.currentItem.date}", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No") {_, _ -> }
+        builder.setTitle(" delete: ${args.currentItem.date}")
+        builder.setMessage("Are you want to delete: ${args.currentItem.date}")
+        builder.create().show()
     }
 }
