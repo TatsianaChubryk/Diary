@@ -72,6 +72,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("it.xabaras.android:recyclerview-swipedecorator:1.4")
 
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")

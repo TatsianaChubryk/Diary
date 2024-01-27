@@ -15,8 +15,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.R
+import com.example.diary.data.models.DiaryEntity
 import com.example.diary.data.viewmodel.DiaryViewModel
 import com.example.diary.databinding.FragmentListBinding
+import com.google.android.material.snackbar.Snackbar
+import java.text.FieldPosition
 
 class ListFragment : Fragment() {
 
@@ -50,16 +53,32 @@ class ListFragment : Fragment() {
     }
 
     private fun swipeToDelete(recyclerView: RecyclerView) {
-        val swipeToDeleteCallback = object : SwipeToDelete() {
+        val swipeToDeleteCallback = object : SwipeToDelete(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val itemToDelete = adapter.dataList[viewHolder.adapterPosition]
+                val deletedItem = adapter.dataList[viewHolder.adapterPosition]
                 // Delete Item
-                mDiaryViewModel.deleteItem(itemToDelete)
-                Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
+                mDiaryViewModel.deleteItem(deletedItem)
+                //Undo
+                adapter.notifyItemChanged(viewHolder.adapterPosition)
+                undoDelete(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private fun undoDelete(view: View, deletedItem: DiaryEntity, position: Int) {
+
+        val snackBar = Snackbar.make(
+            view,
+            "Удалено '${deletedItem.date}'",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.setAction("Отменить"){
+            mDiaryViewModel.insertData(deletedItem)
+            adapter.notifyItemChanged(position)
+        }
+        snackBar.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

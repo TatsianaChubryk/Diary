@@ -33,8 +33,6 @@ class AddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-
         binding = FragmentAddBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
@@ -72,7 +70,6 @@ class AddFragment : Fragment() {
                 mDescription
             )
             mDiaryViewModel.insertData(newData)
-            Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
     }
