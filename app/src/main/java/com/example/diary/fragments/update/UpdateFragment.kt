@@ -68,11 +68,8 @@ class UpdateFragment : Fragment() {
                 description
             )
             mDiaryViewModel.updateData(updateItem)
-            Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        } else{
-            Toast.makeText(requireContext(), "SOS", Toast.LENGTH_SHORT).show()
-        }
+        } 
     }
 
     //нужен ли мне этот вопрос перед удалением?
