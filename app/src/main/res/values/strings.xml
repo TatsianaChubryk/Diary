@@ -17,5 +17,11 @@
         <item>High Priority</item>
         <item>Medium Priority</item>
         <item>Low Priority</item>
+        <item>Саморефлексия</item>
+        <item>Поведение</item>
+        <item>Мечты и цели</item>
+        <item>Развитие</item>
+        <item>Убеждения</item>
+        <item>Мотивация</item>
     </string-array>
 </resources>
