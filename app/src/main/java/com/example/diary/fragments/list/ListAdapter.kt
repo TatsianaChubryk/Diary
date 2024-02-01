@@ -3,7 +3,6 @@ package com.example.diary.fragments.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +30,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.title_txt).text = dataList[position].date
+        holder.itemView.findViewById<TextView>(R.id.date_txt).text = dataList[position].date
         holder.itemView.findViewById<TextView>(R.id.description_txt).text =
             dataList[position].description
 
