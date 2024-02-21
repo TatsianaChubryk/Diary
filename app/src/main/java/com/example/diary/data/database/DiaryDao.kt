@@ -12,7 +12,7 @@ import com.example.diary.data.models.DiaryEntity
 @Dao
 interface DiaryDao {
 
-    @Query("SELECT * FROM diary_table ORDER BY id ASC")
+    @Query("SELECT * FROM diary_table ORDER BY id DESC")
     fun getAllData(): LiveData<List<DiaryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

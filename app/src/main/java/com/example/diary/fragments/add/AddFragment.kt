@@ -35,14 +35,26 @@ class AddFragment : Fragment() {
     ): View {
         binding = FragmentAddBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
-        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+       // binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dateFormat()
+        binding.refreshImg.setOnClickListener {
+            binding.reflectionTxt.text = getPrediction()
+        }
+
+       // dateFormat()
+    }
+
+    private fun randomReflection(): Int{
+        val size = resources.getStringArray(R.array.selfReflection).size - 1
+        return (0..size).random()
+    }
+    private fun getPrediction():String{
+        return resources.getStringArray(R.array.selfReflection)[randomReflection()]
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -51,12 +63,12 @@ class AddFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_add) {
-            insertDataToDB()
+           // insertDataToDB()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun insertDataToDB() {
+    /*private fun insertDataToDB() {
         val mDate = binding.dateEt.text.toString()
         val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
@@ -72,12 +84,12 @@ class AddFragment : Fragment() {
             mDiaryViewModel.insertData(newData)
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
-    }
+    }*/
 
-    private fun dateFormat() {
+    /*private fun dateFormat() {
         val formatter = SimpleDateFormat("dd.MM.yy")
         val date = Calendar.getInstance().time
         val timeString = formatter.format(date)
         binding.dateEt.setText(timeString).toString()
-    }
+    }*/
 }
