@@ -11,6 +11,6 @@ data class DiaryEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var date: String,
-    var priority: Priority,
+    //var priority: Priority,
     var description: String
 ): Parcelable

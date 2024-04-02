@@ -15,16 +15,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.diary.R
 import com.example.diary.data.models.DiaryEntity
-import com.example.diary.data.models.Priority
 import com.example.diary.data.viewmodel.DiaryViewModel
-import com.example.diary.data.viewmodel.SharedViewModel
 import com.example.diary.databinding.FragmentUpdateBinding
 
 class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
     private val args by navArgs<UpdateFragmentArgs>()
-    private val mSharedViewModel: SharedViewModel by viewModels()
+    //private val mSharedViewModel: SharedViewModel by viewModels()
     private val mDiaryViewModel: DiaryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +34,8 @@ class UpdateFragment : Fragment() {
         //сетаю в экран обновления
         binding.currentDateEt.setText(args.currentItem.date)
         binding.currentDescriptionEt.setText(args.currentItem.description)
-        binding.currentPrioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
-        binding.currentPrioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+        //binding.currentPrioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
+        //binding.currentPrioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
 
         return binding.root
     }
@@ -49,7 +47,7 @@ class UpdateFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_save -> updateItem()
-            R.id.menu_delete -> confirmItemRemoval()
+            //R.id.menu_delete -> confirmItemRemoval()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -59,12 +57,12 @@ class UpdateFragment : Fragment() {
         val description = binding.currentDescriptionEt.text.toString()
         val getPriority = binding.currentPrioritiesSpinner.selectedItem.toString()
 
-        val validation = mSharedViewModel.verifyDataFromUser(date, description)
-        if(validation){
+        //val validation = mSharedViewModel.verifyDataFromUser(date, description)
+        //if(validation){
             val updateItem = DiaryEntity(
                args.currentItem.id,
                 date,
-                mSharedViewModel.parsePriority(getPriority),
+                //mSharedViewModel.parsePriority(getPriority),
                 description
             )
             mDiaryViewModel.updateData(updateItem)
@@ -73,7 +71,7 @@ class UpdateFragment : Fragment() {
     }
 
     //нужен ли мне этот вопрос перед удалением?
-    private fun confirmItemRemoval() {
+    /*private fun confirmItemRemoval() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") {_, _ ->
             mDiaryViewModel.deleteItem(args.currentItem)
@@ -84,5 +82,4 @@ class UpdateFragment : Fragment() {
         builder.setTitle(" delete: ${args.currentItem.date}")
         builder.setMessage("Are you want to delete: ${args.currentItem.date}")
         builder.create().show()
-    }
-}
+    }*/

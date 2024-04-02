@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.diary.R
 import com.example.diary.data.models.DiaryEntity
 import com.example.diary.data.viewmodel.DiaryViewModel
-import com.example.diary.data.viewmodel.SharedViewModel
 import com.example.diary.databinding.FragmentAddBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -22,14 +21,14 @@ class AddFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBinding
     private val mDiaryViewModel: DiaryViewModel by viewModels()
-    private val mSharedViewModel: SharedViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
-       // binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+        // binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         return binding.root
     }
 
@@ -53,20 +52,20 @@ class AddFragment : Fragment() {
 
     private fun insertDataToDB() {
         val mDate = binding.dateEt.text.toString()
-        val mPriority = binding.prioritiesSpinner.selectedItem.toString()
+        //val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
 
-        val validation = mSharedViewModel.verifyDataFromUser(mDate, mDescription)
-        if (validation) {
+        /*val validation = mSharedViewModel.verifyDataFromUser(mDate, mDescription)
+        if (validation) {*/
             val newData = DiaryEntity(
                 0,
                 mDate,
-                mSharedViewModel.parsePriority(mPriority),
+               // mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
             mDiaryViewModel.insertData(newData)
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
-        }
+
     }
 
     private fun dateFormat() {
