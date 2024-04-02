@@ -37,7 +37,7 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
-        //swipeToDelete(recyclerView)
+        swipeToDelete(recyclerView)
 
 
 
@@ -58,7 +58,7 @@ class ListFragment : Fragment() {
         }
     }
 
-    /*private fun swipeToDelete(recyclerView: RecyclerView) {
+    private fun swipeToDelete(recyclerView: RecyclerView) {
         val swipeToDeleteCallback = object : SwipeToDelete(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedItem = adapter.dataList[viewHolder.adapterPosition]
@@ -71,7 +71,7 @@ class ListFragment : Fragment() {
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-    }*/
+    }
 
     private fun undoDelete(view: View, deletedItem: DiaryEntity, position: Int) {
 

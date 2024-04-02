@@ -6,11 +6,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.R
-//import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 abstract class SwipeToDelete(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    /*val deleteColor = ContextCompat.getColor(context, R.color.red)
+    val deleteColor = ContextCompat.getColor(context, R.color.red)
 
     override fun onMove(
         recyclerView: RecyclerView,
@@ -42,5 +42,5 @@ abstract class SwipeToDelete(context: Context) : ItemTouchHelper.SimpleCallback(
             .create()
             .decorate()
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-    }*/
+    }
 }
