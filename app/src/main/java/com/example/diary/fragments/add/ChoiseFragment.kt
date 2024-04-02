@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.diary.R
 import com.example.diary.databinding.FragmentChoiseBinding
 
@@ -18,6 +19,12 @@ class ChoiseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChoiseBinding.inflate(inflater, container, false)
+
+        binding.addBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_choiseFragment_to_addFragment)
+
+        }
+
         setHasOptionsMenu(true)
         // binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
         return binding.root

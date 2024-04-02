@@ -9,10 +9,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.diary.R
+import com.example.diary.data.models.DiaryEntity
 import com.example.diary.data.viewmodel.DiaryViewModel
 import com.example.diary.data.viewmodel.SharedViewModel
 import com.example.diary.databinding.FragmentAddBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class AddFragment : Fragment() {
 
@@ -29,24 +33,11 @@ class AddFragment : Fragment() {
         return binding.root
     }
 
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.reflectionTxt.text = getPrediction()
 
-        binding.refreshImg.setOnClickListener {
-            binding.reflectionTxt.text = getPrediction()
-        }
-
-       // dateFormat()
-    }*/
-
-    private fun randomReflection(): Int{
-        val size = resources.getStringArray(R.array.reflection).size - 1
-        return (0..size).random()
-    }
-    private fun getPrediction():String{
-        return resources.getStringArray(R.array.reflection)[randomReflection()]
+        dateFormat()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,12 +46,12 @@ class AddFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_add) {
-           // insertDataToDB()
+            insertDataToDB()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    /*private fun insertDataToDB() {
+    private fun insertDataToDB() {
         val mDate = binding.dateEt.text.toString()
         val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
@@ -76,12 +67,12 @@ class AddFragment : Fragment() {
             mDiaryViewModel.insertData(newData)
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
-    }*/
+    }
 
-    /*private fun dateFormat() {
+    private fun dateFormat() {
         val formatter = SimpleDateFormat("dd.MM.yy")
         val date = Calendar.getInstance().time
         val timeString = formatter.format(date)
         binding.dateEt.setText(timeString).toString()
-    }*/
+    }
 }
