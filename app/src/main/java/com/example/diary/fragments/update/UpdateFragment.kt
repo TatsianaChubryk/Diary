@@ -22,7 +22,6 @@ class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
     private val args by navArgs<UpdateFragmentArgs>()
-    //private val mSharedViewModel: SharedViewModel by viewModels()
     private val mDiaryViewModel: DiaryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +33,6 @@ class UpdateFragment : Fragment() {
         //сетаю в экран обновления
         binding.currentDateEt.setText(args.currentItem.date)
         binding.currentDescriptionEt.setText(args.currentItem.description)
-        //binding.currentPrioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
-        //binding.currentPrioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
 
         return binding.root
     }
@@ -55,14 +52,12 @@ class UpdateFragment : Fragment() {
     private fun updateItem() {
         val date = binding.currentDateEt.text.toString()
         val description = binding.currentDescriptionEt.text.toString()
-        val getPriority = binding.currentPrioritiesSpinner.selectedItem.toString()
 
         //val validation = mSharedViewModel.verifyDataFromUser(date, description)
         //if(validation){
             val updateItem = DiaryEntity(
                args.currentItem.id,
                 date,
-                //mSharedViewModel.parsePriority(getPriority),
                 description
             )
             mDiaryViewModel.updateData(updateItem)

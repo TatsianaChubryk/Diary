@@ -52,7 +52,6 @@ class AddFragment : Fragment() {
 
     private fun insertDataToDB() {
         val mDate = binding.dateEt.text.toString()
-        //val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
 
         /*val validation = mSharedViewModel.verifyDataFromUser(mDate, mDescription)
@@ -60,7 +59,6 @@ class AddFragment : Fragment() {
             val newData = DiaryEntity(
                 0,
                 mDate,
-               // mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
             mDiaryViewModel.insertData(newData)
